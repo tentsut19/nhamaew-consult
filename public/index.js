@@ -43,59 +43,119 @@ async function initializeLiff() {
             }
         }
 
+        countViewPet();
     } catch (error) {
         alert('เกิดข้อผิดพลาด');
         console.error('API Error:', error);
     }
 }
 
-// async function selectAnimalType(value){
-//     try {
-//         if (!liff.isLoggedIn() && PROD) {
-//             const destinationUrl = window.location.href;
-//             liff.login({redirectUri: destinationUrl});
-//             return;
-//         }
+async function countViewPet(){
+    try {
+        if (!liff.isLoggedIn() && PROD) {
+            const destinationUrl = window.location.href;
+            liff.login({redirectUri: destinationUrl});
+            return;
+        }
 
-//         var profile
-//         if (PROD) {
-//             profile = await liff.getProfile();
-//         }else{
-//             profile = profileTest;
-//         }
+        var profile
+        if (PROD) {
+            profile = await liff.getProfile();
+        }else{
+            profile = profileTest;
+        }
 
-//         document.getElementById("overlay").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
 
-//         const response = await fetch(URL_UPDATE_ANIMAL_TYPE, {
-//             method: 'POST',
-//             headers: {
-//                 'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({
-//                 lineUserId: profile.userId,
-//                 displayName: profile.displayName,
-//                 statusMessage: profile.statusMessage,
-//                 pictureUrl: profile.pictureUrl,
-//                 animalType: value
-//             })
-//         });
+        const response = await fetch(URL_COUNT_VIEW_PET, {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                lineUserId: profile.userId,
+                displayName: profile.displayName,
+                statusMessage: profile.statusMessage,
+                pictureUrl: profile.pictureUrl
+            })
+        });
 
-//         document.getElementById("overlay").style.display = "none";
-//         console.log('response:', response);
-//         if(response.status == 200){
-//             const data = await response.json();
-//             console.log('API Response:', data);
-//             liff.closeWindow();
-//         }else{
-//             swalError('เกิดข้อผิดพลาดกรุณาลองใหม่อีกครั้ง','');
-//         }
-//     } catch (error) {
-//         document.getElementById("overlay").style.display = "none";
-//         swalError('เกิดข้อผิดพลาด','');
-//         console.error('API Error:', error);
-//     }
-// }
+        document.getElementById("overlay").style.display = "none";
+        console.log('response:', response);
+        if(response.status == 200){
+            const data = await response.json();
+            console.log('API Response:', data);
+
+            var viewSOPet = document.getElementById("viewSOPet");
+            viewSOPet.innerHTML = data.viewSOPET
+            var viewPettinee = document.getElementById("viewPettinee");
+            viewPettinee.innerHTML = data.viewPETTINEE
+        }
+    } catch (error) {
+        document.getElementById("overlay").style.display = "none";
+        console.error('API Error:', error);
+    }
+}
+
+async function updateViewPet(partner){
+    try {
+        if (!liff.isLoggedIn() && PROD) {
+            const destinationUrl = window.location.href;
+            liff.login({redirectUri: destinationUrl});
+            return;
+        }
+
+        var profile
+        if (PROD) {
+            profile = await liff.getProfile();
+        }else{
+            profile = profileTest;
+        }
+
+        document.getElementById("overlay").style.display = "block";
+
+        const response = await fetch(URL_UPDATE_VIEW_PET, {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                lineUserId: profile.userId,
+                displayName: profile.displayName,
+                statusMessage: profile.statusMessage,
+                pictureUrl: profile.pictureUrl,
+                partner: partner
+            })
+        });
+
+        document.getElementById("overlay").style.display = "none";
+        console.log('response:', response);
+        if(response.status == 200){
+            const data = await response.json();
+            console.log('API Response:', data);
+            if('SOPET'==partner){
+                liff.openWindow({
+                    url: 'https://sopet.co',
+                    external: true
+                });
+            }else{
+                //PETTINEE
+                liff.openWindow({
+                    url: 'https://lin.ee/dmqj6KW',
+                    external: false
+                });
+            }
+        }else{
+            swalError('เกิดข้อผิดพลาดกรุณาลองใหม่อีกครั้ง','');
+        }
+    } catch (error) {
+        document.getElementById("overlay").style.display = "none";
+        swalError('เกิดข้อผิดพลาด','กรุณาลองใหม่อีกครั้ง');
+        console.error('API Error:', error);
+    }
+}
 
 function swalError(title,text){
     Swal.fire({

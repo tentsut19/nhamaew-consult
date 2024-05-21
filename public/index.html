@@ -10,6 +10,29 @@
     <!-- <link rel="stylesheet" src="custom.css"> -->
     <style>
        /* @import url('./bootstrap-combined.min.css'); */
+       #overlay {
+        background: #ffffff;
+        color: #666666;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: 5000;
+        top: 0;
+        left: 0;
+        float: left;
+        text-align: center;
+        padding-top: 4%;
+        opacity: .80;
+    }
+    .spinner {
+        margin: 0 auto;
+        height: 64px;
+        width: 64px;
+        animation: rotate 0.8s infinite linear;
+        border: 5px solid firebrick;
+        border-right-color: transparent;
+        border-radius: 50%;
+    }
 
        @font-face {
         font-family: 'thaisanslite_r1';
@@ -23,7 +46,7 @@
 .carousel-linked-nav,
 .item img {
   display: block; 
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 
 .carousel-linked-nav {
@@ -40,7 +63,7 @@ body {
             /* height: 100vh; */
             /* margin: 0; */
         }
-.container {
+        .container {
             background-color: #fff;
             border-radius: 10px;
             /* width: 300px; */
@@ -49,8 +72,9 @@ body {
             text-align: center;
         }
         .container img {
-            width: 120px;
+            width: 38%;
             height: auto;
+            /* margin-right: 40px; */
         }
         .views {
             font-size: 12px;
@@ -60,7 +84,7 @@ body {
         .title {
             font-size: 24px;
             font-weight: bold;
-            margin: 10px 0;
+            /* margin-right: 40px; */
         }
         .details {
             text-align: left;
@@ -86,7 +110,7 @@ body {
             border-radius: 5px;
             text-align: center;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 34px;
             cursor: pointer;
         }
         .button-see-more {
@@ -145,21 +169,38 @@ body {
 
     li {
       font-size: 18px;
+      margin: 4px;
+    }
+    .container-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    hr {
+      border-top: 3px solid #CBBAAE;
     }
     </style>
 </head>
 <body>
+<div id="overlay" style="display:none;">
+    <div class="spinner"></div>
+    <br/>
+    Loading...
+</div>
+
     <div id="myCarousel" class="carousel slide" style="margin-bottom: 10px;">
         <!-- Carousel items -->
         <div class="carousel-inner">
           <div class="active item">
             <div class="container">
-                <div class="views"><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                <div class="views"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                   <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
                   <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                </svg> <span id="viewSOPet">0</span> ครั้ง</span></div>
-                <img src="logo.png" alt="S.O.PET">
-                <div class="title">S.O.PET</div>
+                </svg> <strong id="viewSOPet">0</strong> ครั้ง</strong></div>
+                <div class="container-img"><img src="logo.png" alt="S.O.PET"></div>
+                <!-- <div class="title">S.O.PET</div> -->
                 <hr>
                 <div class="details details_hide">
                     <p><strong>ประเภทสัตว์ที่ให้บริการ</strong></p>
@@ -170,11 +211,12 @@ body {
                         <li>ปรึกษากับคุณหมอชั้นนำของประเทศที่มีประสบการณ์ในรพ.ชั้นนำ</li>
                         <li>ปรึกษาคุณหมอได้ทันที</li>
                         <li>เลือกคุณหมอได้ ดูข้อมูลโดยละเอียดของคุณหมอได้</li>
+                        <li>คุณหมอสามารถประเมินอาการเบื้องต้น ให้คำแนะนำ รวมถึงสั่งจ่ายอาหารประกอบการรักษาและอาหารเสริมได้</li>
                         <li>คุณหมอส่งสรุปการปรึกษาให้ทุกครั้ง สามารถดูย้อนหลังได้ตลอด</li>
                         <li>การันตีด้วยความพึงพอใจ 96% จาก 10,000+ เคส</li>
                     </ul>
                 </div>
-                <button style="font-family: 'thaisanslite_r1';" class="button-see-more">ดูเพิ่มเติม</button>
+                <button style="font-family: 'thaisanslite_r1';" class="button-see-more"><b style="font-size: 24px;">ดูเพิ่มเติม</b></button>
                 <hr>
                 <div class="price">
                     <p><strong>ราคา</strong></p>
@@ -188,17 +230,17 @@ body {
                       <path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2z"/>
                     </svg> วิดีโอคอล</span><span>179 บาท</span><span>20 นาที</span></p>
                 </div>
-                <a onclick="openWebSOPet()" class="button">เลือก</a>
+                <a onclick="updateViewPet('SOPET')" class="button"><b>เลือก</b></a>
             </div>
           </div>
           <div class="item">
             <div class="container">
-                <div class="views"><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                <div class="views"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                   <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
                   <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                </svg> <span id="viewPettinee">0</span> ครั้ง</span></div>
-                <img src="logo-pettinee.png" alt="Pettinee">
-                <div class="title">Pettinee</div>
+                </svg> <strong id="viewPettinee">0</strong> ครั้ง</strong></div>
+                <div class="container-img"><img src="logo-pettinee.png" alt="Pettinee"></div>
+                <!-- <div class="title">Pettinee</div> -->
                 <hr>
                 <div class="details details_hide">
                     <p><strong>ประเภทสัตว์ที่ให้บริการ</strong></p>
@@ -206,19 +248,25 @@ body {
                     <hr>
                     <p><strong>รายละเอียดบริการ</strong></p>
                     <ul>
-                        <li>มีพยาบาลคอยดูแลตลอดการใช้บริการ</li>
-                        <li>สามารถให้คำปรึกษาเกี่ยวกับปัญหาพฤติกรรม</li>
+                      <li>🎁 Premium Services อุ่นใจได้ที่บ้าน ประเมินอาการเบื้องต้น จ่ายอาหารประกอบการรักษาและอาหารเสริม ดูแลครบวงจร 
+                        “เพราะเราอยากให้สัตว์เลี้ยงสุขภาพดีตั้งแต่ที่บ้าน ไม่ต้องป่วยไม่ต้องไปรพ.”</li>
+                      <li>✅ Save time ไม่ต้องรอคิว 4-5 ชม.</li>
+                      <li>🛒 Save cost ควบคุมค่าใช้จ่ายได้</li>
+                      <li>⭐️ เวลาปรึกษาคุณภาพ เริ่มต้น 30 นาที</li>
+                      <li>🐱 มีน้องพยาบาลส่วนตัวติดตามอาการตลอดการใช้บริการ</li>
+                      <li>📄 คุณหมอส่งสรุปการปรึกษาให้ทุกครั้ง สามารถดูย้อนหลังได้ตลอด</li>
+                      <li>🚀 มีบริการเสริมจากแพ็กเกจหลัก Vet-Delivery ส่งหมอไปหาแมวถึงที่บ้าน</li>
                     </ul>
                 </div>
-                <!-- <a href="#" class="button see-more">ดูเพิ่มเติม</a> -->
+                <button style="font-family: 'thaisanslite_r1';" class="button-see-more"><b style="font-size: 24px;">ดูเพิ่มเติม</b></button>
                 <hr>
                 <div class="price">
                     <p><strong>ราคา</strong></p>
-                    <p><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
-                      <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                    <p><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-video-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2z"/>
                     </svg> วิดีโอคอล</span><span>399 บาท</span><span>30 นาที</span></p>
                 </div>
-                <a href="https://lin.ee/dmqj6KW" class="button">เลือก</a>
+                <a onclick="updateViewPet('PETTINEE')" class="button"><b>เลือก</b></a>
             </div>
           </div>
         </div>
@@ -242,8 +290,8 @@ body {
     <!-- Your custom JS -->
 
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-    <script src="liff-config.js?cache=202403120904"></script>
-    <script src="index.js?cache=202403120904"></script>
+    <script src="liff-config.js?cache=202405210237"></script>
+    <script src="index.js?cache=202405210237"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
       <script>
