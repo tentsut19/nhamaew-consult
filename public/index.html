@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="ปรึกษาสัตวแพทย์" />
+    <meta property="og:description" content="✅ ปรึกษาคุณหมอทาง vdo call แบบส่วนตัว✅ คุณหมอสั่งจ่ายอาหารเสริม อาหารประกอบการรักษาได้" />
+    
     <title>ปรึกษาสัตวแพทย์</title>
     <link rel="icon" type="image/x-icon" href="cat.ico">
     <link rel="stylesheet" href="bootstrap-combined.min.css">
@@ -78,13 +81,24 @@ body {
         }
         .views {
             font-size: 12px;
-            color: #888;
+            /* color: #888; */
             float: right;
+        }
+        .join {
+            font-size: 16px;
+            padding-top: 5px;
         }
         .title {
             font-size: 24px;
             font-weight: bold;
-            /* margin-right: 40px; */
+            padding: 6px;
+            text-align: center;
+        }
+        .pages {
+            font-size: 22px;
+            font-weight: bold;
+            padding: 6px;
+            text-align: center;
         }
         .details {
             text-align: left;
@@ -176,6 +190,7 @@ body {
         justify-content: center;
         align-items: center;
         width: 100%;
+        margin-top: 40px;
     }
 
     hr {
@@ -191,14 +206,44 @@ body {
 </div>
 
     <div id="myCarousel" class="carousel slide" style="margin-bottom: 10px;">
+      <div class="title">เลือกทีมสัตวแพทย์ที่ต้องการปรึกษา</div>
+      <div class="pages"><strong id="titlePages">หน้า 1 จาก 3</strong></div>
         <!-- Carousel items -->
         <div class="carousel-inner">
-          <div class="active item">
+          <div id="div-item-moya" class="item active">
             <div class="container">
-                <div class="views"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                </svg> <strong id="viewSOPet">0</strong> ครั้ง</strong></div>
+                <div class="views"><strong>เลือกแล้ว <strong id="viewMoya">0</strong> ครั้ง</strong><br>
+                  <strong class="join">(เข้าร่วม<strong class="join" id="joinMoya"></strong>)</strong>
+                </div>
+                <div class="container-img"><img style="width: 70%" src="Moyapetcare.jpg" alt="Moya"></div>
+                <hr>
+                <div class="details details_hide">
+                    <p><strong>ประเภทสัตว์ที่ให้บริการ</strong></p>
+                    <p>แมว, สุนัข</p>
+                    <hr>
+                    <p><strong>รายละเอียดบริการ</strong></p>
+                    <ul>
+                      <li>ปรึกษาฟรีกับสัตวแพทย์ที่มีประสบการณ์ในรพ.มหาวิทยาลัยชั้นนำของประเทศ</li>
+                      <li>เชี่ยวชาญในการให้คำแนะนำเกี่ยวกับยา อาหารรักษาโรค อาหารเสริม และผลิตภัณฑ์อื่นๆของสัตว์เลี้ยง</li>
+                      <li>มียาครอบคลุมทุกประเภท และมีร้านขายยาสัตว์ 5 สาขาที่ครอบคลุมกทม.และปริมณฑล จึงมั่นใจได้ว่าสินค้าสัตว์เลี้ยงทุกชนิดมีมาตรฐานและเป็นของแท้ 100%</li>
+                    </ul>
+                </div>
+                <button style="font-family: 'thaisanslite_r1';" class="button-see-more"><b style="font-size: 24px;">ดูเพิ่มเติม</b></button>
+                <hr>
+                <div class="price">
+                    <p><strong>ราคา</strong></p>
+                    <p><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
+                      <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                    </svg> แชท</span><span>ฟรี</span><span></span></p>
+                </div>
+                <a onclick="updateViewPet('MOYA')" class="button"><b style="font-size: 24px;">ไปที่บริการ</b></a>
+            </div>
+          </div>
+          <div id="div-item-sopet" class="item">
+            <div class="container">
+                <div class="views"><strong>เลือกแล้ว <strong id="viewSOPet">0</strong> ครั้ง</strong><br>
+                  <strong class="join">(เข้าร่วม<strong class="join" id="joinSOPet"></strong>)</strong>
+                </div>
                 <div class="container-img"><img src="logo.png" alt="S.O.PET"></div>
                 <!-- <div class="title">S.O.PET</div> -->
                 <hr>
@@ -230,15 +275,14 @@ body {
                       <path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2z"/>
                     </svg> วิดีโอคอล</span><span>179 บาท</span><span>20 นาที</span></p>
                 </div>
-                <a onclick="updateViewPet('SOPET')" class="button"><b>เลือก</b></a>
+                <a onclick="updateViewPet('SOPET')" class="button"><b style="font-size: 24px;">ดูคุณหมอที่ว่าง</b></a>
             </div>
           </div>
-          <div class="item">
+          <div id="div-item-pettinee" class="item">
             <div class="container">
-                <div class="views"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                </svg> <strong id="viewPettinee">0</strong> ครั้ง</strong></div>
+                <div class="views"><strong>เลือกแล้ว <strong id="viewPettinee">0</strong> ครั้ง</strong><br>
+                  <strong class="join">(เข้าร่วม<strong class="join" id="joinPettinee"></strong>)</strong>
+                </div>
                 <div class="container-img"><img src="logo-pettinee.png" alt="Pettinee"></div>
                 <!-- <div class="title">Pettinee</div> -->
                 <hr>
@@ -266,7 +310,7 @@ body {
                       <path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2z"/>
                     </svg> วิดีโอคอล</span><span>399 บาท</span><span>30 นาที</span></p>
                 </div>
-                <a onclick="updateViewPet('PETTINEE')" class="button"><b>เลือก</b></a>
+                <a onclick="updateViewPet('PETTINEE')" class="button"><b style="font-size: 24px;">ไปที่บริการ</b></a>
             </div>
           </div>
         </div>
@@ -276,10 +320,10 @@ body {
       </div>
       
       <!-- LINKED NAV -->
-      <ol class="carousel-linked-nav pagination">
+      <!-- <ol class="carousel-linked-nav pagination">
         <li class="active"><a href="#1">SOPet</a></li>
         <li><a href="#2">Pettinee</a></li>
-      </ol>
+      </ol> -->
       
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -290,8 +334,8 @@ body {
     <!-- Your custom JS -->
 
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-    <script src="liff-config.js?cache=202405210237"></script>
-    <script src="index.js?cache=202405210237"></script>
+    <script src="liff-config.js?cache=202407030823"></script>
+    <script src="index.js?cache=202407030823"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
       <script>
@@ -339,9 +383,10 @@ body {
   /* SLIDE ON CLICK */ 
   
   $('.carousel-linked-nav > li > a').click(function() {
+    console.log('xxxxxxxxxx');
       // grab href, remove pound sign, convert to number
       var item = Number($(this).attr('href').substring(1));
-
+      console.log(item);
       // slide to number -1 (account for zero indexing)
       $('#myCarousel').carousel(item - 1);
   
@@ -364,7 +409,12 @@ body {
   
       // get index of currently active item
       var idx = $('#myCarousel .item.active').index();
-  
+      // console.log('myCarousel bind idx : '+idx);
+      var idxMax = $('#myCarousel .item').length;
+      // console.log(idxMax);
+      var titlePages = document.getElementById("titlePages");
+      titlePages.innerHTML = 'หน้า '+(idx+1)+' จาก '+idxMax;
+
       // select currently active item and add active class
       $('.carousel-linked-nav li:eq(' + idx + ')').addClass('active');
   
