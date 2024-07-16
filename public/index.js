@@ -7,7 +7,7 @@ var profile;
 
 async function initializeLiff() {
     try {
-        // document.getElementById("overlay").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
 
         console.log('--- initializeLiff ---')
         await liff.init({ liffId: LIFF_ID });
