@@ -7,7 +7,7 @@ var profile;
 
 async function initializeLiff() {
     try {
-        // document.getElementById("overlay").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
 
         console.log('--- initializeLiff ---')
         await liff.init({ liffId: LIFF_ID });
@@ -83,17 +83,10 @@ async function countViewPet(){
                 console.error("Error:", error);
             } else {
                 console.log("Success:", response);
-                var viewSOPet = document.getElementById("viewSOPet");
-                viewSOPet.innerHTML = response.viewSOPET;
-                var viewPettinee = document.getElementById("viewPettinee");
-                viewPettinee.innerHTML = response.viewPETTINEE;
+                
                 var viewMoya = document.getElementById("viewMoya");
                 viewMoya.innerHTML = response.viewMOYA;
 
-                var joinSOPet = document.getElementById("joinSOPet");
-                joinSOPet.innerHTML = response.joinSOPET;
-                var joinPettinee = document.getElementById("joinPettinee");
-                joinPettinee.innerHTML = response.joinPETTINEE;
                 var joinMoya = document.getElementById("joinMoya");
                 joinMoya.innerHTML = response.joinMOYA;
                 
@@ -128,7 +121,7 @@ async function updateViewPet(partner){
             displayName: profile.displayName,
             statusMessage: profile.statusMessage,
             pictureUrl: profile.pictureUrl,
-            state: "CLICK",
+            state: "SELECT",
             partner: partner
         };
 
@@ -141,8 +134,22 @@ async function updateViewPet(partner){
                 swalError('เกิดข้อผิดพลาดกรุณาลองใหม่อีกครั้ง','');
             } else {
                 console.log("Success:", response);
-                var url = "detail-"+partner.toLowerCase()+".html";
-                window.location.href = url;
+                if('SOPET'==partner){
+                    liff.openWindow({
+                        url: 'https://sopet.co',
+                        external: true
+                    });
+                }else if('PETTINEE'==partner){
+                    liff.openWindow({
+                        url: 'https://lin.ee/dmqj6KW',
+                        external: false
+                    });
+                }else if('MOYA'==partner){
+                    liff.openWindow({
+                        url: 'https://liff.line.me/2002133356-0JOe1MzY',
+                        external: false
+                    });
+                }
             }
         });
 

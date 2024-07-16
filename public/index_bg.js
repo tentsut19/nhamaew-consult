@@ -7,7 +7,7 @@ var profile;
 
 async function initializeLiff() {
     try {
-        // document.getElementById("overlay").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
 
         console.log('--- initializeLiff ---')
         await liff.init({ liffId: LIFF_ID });
@@ -97,6 +97,21 @@ async function countViewPet(){
                 var joinMoya = document.getElementById("joinMoya");
                 joinMoya.innerHTML = response.joinMOYA;
                 
+                var viewPettinee = document.getElementById("div-item-pettinee");
+                var divSOPet = document.getElementById("div-item-sopet");
+                // console.log(response.id % 2);
+                // if(response.id % 2 == 0){
+                //     divSOPet.setAttribute("class", "item active");
+                //     // viewPettinee.classList.remove("active");
+                // }else{
+                //     viewPettinee.setAttribute("class", "item active");
+                //     // divSOPet.classList.remove("active");
+                // }
+
+                var idxMax = $('#myCarousel .item').length;
+                // console.log(idxMax);
+                var titlePages = document.getElementById("titlePages");
+                titlePages.innerHTML = 'หน้า '+(idx+1)+' จาก '+idxMax;
 
             }
         });
@@ -128,7 +143,6 @@ async function updateViewPet(partner){
             displayName: profile.displayName,
             statusMessage: profile.statusMessage,
             pictureUrl: profile.pictureUrl,
-            state: "CLICK",
             partner: partner
         };
 
@@ -141,8 +155,22 @@ async function updateViewPet(partner){
                 swalError('เกิดข้อผิดพลาดกรุณาลองใหม่อีกครั้ง','');
             } else {
                 console.log("Success:", response);
-                var url = "detail-"+partner.toLowerCase()+".html";
-                window.location.href = url;
+                if('SOPET'==partner){
+                    liff.openWindow({
+                        url: 'https://sopet.co',
+                        external: true
+                    });
+                }else if('PETTINEE'==partner){
+                    liff.openWindow({
+                        url: 'https://lin.ee/dmqj6KW',
+                        external: false
+                    });
+                }else if('MOYA'==partner){
+                    liff.openWindow({
+                        url: 'https://liff.line.me/2002133356-0JOe1MzY',
+                        external: false
+                    });
+                }
             }
         });
 
@@ -169,6 +197,111 @@ function postData(url, data, callback) {
     };
 
     xhr.send(JSON.stringify(data));
+}
+
+async function countViewPet_old(){
+    try {
+        if (!liff.isLoggedIn() && PROD) {
+            const destinationUrl = window.location.href;
+            liff.login({redirectUri: destinationUrl});
+            return;
+        }
+
+        var profile
+        if (PROD) {
+            profile = await liff.getProfile();
+        }else{
+            profile = profileTest;
+        }
+
+        const response = await fetch(URL_COUNT_VIEW_PET, {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                lineUserId: profile.userId,
+                displayName: profile.displayName,
+                statusMessage: profile.statusMessage,
+                pictureUrl: profile.pictureUrl
+            })
+        });
+
+        document.getElementById("overlay").style.display = "none";
+        console.log('response:', response);
+        if(response.status == 200){
+            const data = await response.json();
+            console.log('API Response:', data);
+
+            var viewSOPet = document.getElementById("viewSOPet");
+            viewSOPet.innerHTML = data.viewSOPET
+            var viewPettinee = document.getElementById("viewPettinee");
+            viewPettinee.innerHTML = data.viewPETTINEE
+        }
+    } catch (error) {
+        document.getElementById("overlay").style.display = "none";
+        console.error('API Error:', error);
+    }
+}
+
+async function updateViewPet_old(partner){
+    try {
+        if (!liff.isLoggedIn() && PROD) {
+            const destinationUrl = window.location.href;
+            liff.login({redirectUri: destinationUrl});
+            return;
+        }
+
+        var profile
+        if (PROD) {
+            profile = await liff.getProfile();
+        }else{
+            profile = profileTest;
+        }
+
+        document.getElementById("overlay").style.display = "block";
+
+        const response = await fetch(URL_UPDATE_VIEW_PET, {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                lineUserId: profile.userId,
+                displayName: profile.displayName,
+                statusMessage: profile.statusMessage,
+                pictureUrl: profile.pictureUrl,
+                partner: partner
+            })
+        });
+
+        document.getElementById("overlay").style.display = "none";
+        console.log('response:', response);
+        if(response.status == 200){
+            const data = await response.json();
+            console.log('API Response:', data);
+            if('SOPET'==partner){
+                liff.openWindow({
+                    url: 'https://sopet.co',
+                    external: true
+                });
+            }else{
+                //PETTINEE
+                liff.openWindow({
+                    url: 'https://lin.ee/dmqj6KW',
+                    external: false
+                });
+            }
+        }else{
+            swalError('เกิดข้อผิดพลาดกรุณาลองใหม่อีกครั้ง','');
+        }
+    } catch (error) {
+        document.getElementById("overlay").style.display = "none";
+        swalError('เกิดข้อผิดพลาด','กรุณาลองใหม่อีกครั้ง');
+        console.error('API Error:', error);
+    }
 }
 
 function swalError(title,text){
