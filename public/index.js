@@ -86,15 +86,15 @@ async function countViewPet(){
                 console.log("Success:", response);
                 var viewSOPet = document.getElementById("viewSOPet");
                 viewSOPet.innerHTML = response.viewSOPET;
-                var viewPettinee = document.getElementById("viewPettinee");
-                viewPettinee.innerHTML = response.viewPETTINEE;
+                // var viewPettinee = document.getElementById("viewPettinee");
+                // viewPettinee.innerHTML = response.viewPETTINEE;
                 var viewMoya = document.getElementById("viewMoya");
                 viewMoya.innerHTML = response.viewMOYA;
 
                 var joinSOPet = document.getElementById("joinSOPet");
                 joinSOPet.innerHTML = response.joinSOPET;
-                var joinPettinee = document.getElementById("joinPettinee");
-                joinPettinee.innerHTML = response.joinPETTINEE;
+                // var joinPettinee = document.getElementById("joinPettinee");
+                // joinPettinee.innerHTML = response.joinPETTINEE;
                 var joinMoya = document.getElementById("joinMoya");
                 joinMoya.innerHTML = response.joinMOYA;
                 
